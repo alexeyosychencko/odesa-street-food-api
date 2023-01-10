@@ -1,4 +1,5 @@
 export class PostModel {
+  _id: string;
   userId: string; // identifier for the user who wrote the post
   title: string; // title for the post
   body: string; // main text of the post

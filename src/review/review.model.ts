@@ -1,4 +1,5 @@
 export class ReviewModel {
+  _id: string;
   outletId: string; // identifier for the outlet that the review is for
   userId: string; // identifier for the user who wrote the review
   ratingTaste: number; // rating given by the user (e.g. 1 to 5 stars)

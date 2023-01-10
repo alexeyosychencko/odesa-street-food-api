@@ -6,6 +6,7 @@ export enum DistrictCategory {
 }
 
 export class OutletModel {
+  _id: string;
   name: string;
   description: string;
   menu?: string;

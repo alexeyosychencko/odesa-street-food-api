@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { DistrictCategory } from '../outlet.model';
 
 class FindOutletByCuisineDto {
