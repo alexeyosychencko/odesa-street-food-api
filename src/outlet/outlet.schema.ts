@@ -32,7 +32,7 @@ export class Outlet {
   @Prop()
   phoneNumber?: string;
 
-  @Prop()
+  @Prop({ enum: DistrictCategory })
   district: DistrictCategory;
 
   @Prop()
