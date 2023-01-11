@@ -1,10 +1,19 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { PostModel } from './post.model';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { CreatePostDto } from './dto/create-post.dto';
+import { PostDocument } from './post.schema';
 
 @Controller('post')
 export class PostController {
   @Post('create')
-  async create(@Body() dto: Omit<PostModel, '_id'>) {
+  async create(@Body() dto: CreatePostDto) {
     //
   }
 
@@ -13,8 +22,18 @@ export class PostController {
     //
   }
 
+  @Patch(':id')
+  async patch(@Param('id') id: string, @Body() dto: PostDocument) {
+    //
+  }
+
+  @Get(':id')
+  async getByPostId(@Param('id') id: string) {
+    //
+  }
+
   @Get('get-new')
-  async getByProduct() {
+  async getAllPosts() {
     //
   }
 }

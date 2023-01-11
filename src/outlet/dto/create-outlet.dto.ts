@@ -1,12 +1,6 @@
-export enum DistrictCategory {
-  Center,
-  Tairova,
-  Posyolok,
-  Slobodka,
-}
+import { DistrictCategory } from '../outlet.schema';
 
-export class OutletModel {
-  _id: string;
+export class CreateOutletDto {
   name: string;
   description: string;
   menu?: string;
@@ -20,10 +14,10 @@ export class OutletModel {
   timeOpenSek?: number;
   timeCloseSek?: number;
   photoUrl?: string;
-  userId: number;
   createdAt: Date;
   lastUpdate: Date;
   calculateTasteRating: number;
   calculateCleanRating: number;
   calculatePoliteRating: number;
+  userId: string;
 }

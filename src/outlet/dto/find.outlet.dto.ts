@@ -1,4 +1,4 @@
-import { DistrictCategory } from '../outlet.model';
+import { DistrictCategory } from '../outlet.schema';
 
 class FindOutletByCuisineDto {
   cuisine: string;

@@ -8,13 +8,14 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { CreateOutletDto } from './dto/create-outlet.dto';
 import { FindOutlet } from './dto/find.outlet.dto';
-import { OutletModel } from './outlet.model';
+import { OutletDocument } from './outlet.schema';
 
 @Controller('outlet')
 export class OutletController {
   @Post('create')
-  async create(@Body() dto: Omit<OutletModel, '_id'>) {
+  async create(@Body() dto: CreateOutletDto) {
     //
   }
 
@@ -34,7 +35,7 @@ export class OutletController {
   }
 
   @Patch(':id')
-  async patch(@Param('id') id: string, @Body() dto: OutletModel) {
+  async patch(@Param('id') id: string, @Body() dto: OutletDocument) {
     //
   }
 
