@@ -5,7 +5,9 @@ import { Outlet, OutletSchema } from './outlet.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Outlet.name, schema: OutletSchema }]),
+    MongooseModule.forFeature([
+      { name: Outlet.name, schema: OutletSchema, collection: 'Outlet' },
+    ]),
   ],
   controllers: [OutletController],
 })
