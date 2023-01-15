@@ -34,3 +34,22 @@ export class User {
 }
 
 export const UserShema = SchemaFactory.createForClass(User);
+
+// example: get user with a outles
+// export const postSchema: Schema = new Schema<User>({
+//   id: String,
+//   title: String,
+//   userId: String,
+// }, {
+//   timestamps: true,
+//   toJSON: {
+//     virtuals: true,
+//   },
+// });
+
+// postSchema.virtual('outlets', {
+//   ref: 'Outlet',
+//   localField: '_id',
+//   foreignField: 'userId',
+//   justOne: false,
+// });
