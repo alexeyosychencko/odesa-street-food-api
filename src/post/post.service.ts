@@ -11,34 +11,38 @@ export class PostService {
     private readonly postModel: mongoose.Model<PostDocument>,
   ) {}
 
-  async create(createPostDto: CreatePostDto, image): Promise<Post> {
+  async create(createPostDto: CreatePostDto, image?): Promise<Post> {
     const createPost = new this.postModel(createPostDto);
     if (image) {
       // TODO: save image
       createPost.imageUrl = '';
     }
-    return createPost.save();
+    return await createPost.save();
   }
 
   async delete(id: string): Promise<Post | null> {
-    return this.postModel.findByIdAndDelete(id).exec();
+    return await this.postModel.findByIdAndDelete(id).exec();
   }
 
-  async update(id: string, post: CreatePostDto, image): Promise<Post> {
+  async update(id: string, post: CreatePostDto, image?): Promise<Post> {
     let imageUrl;
     if (image) {
       // TODO: save image
       imageUrl = '';
     }
-    return this.postModel
+    return await this.postModel
       .findOneAndUpdate({ id: id }, imageUrl ? { ...post, imageUrl } : post, {
         new: true,
       })
       .exec();
   }
 
+  async findById(id: string): Promise<Post> {
+    return await this.postModel.findOne({ id }).exec();
+  }
+
   async findAll(): Promise<Post[]> {
-    return this.postModel.find().exec();
+    return await this.postModel.find().exec();
   }
 
   async findLast(limit: number, skip?: number): Promise<Post[]> {
@@ -46,6 +50,6 @@ export class PostService {
     if (skip) {
       return query.skip(skip).exec();
     }
-    return query.exec();
+    return await query.exec();
   }
 }

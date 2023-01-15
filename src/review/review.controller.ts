@@ -18,7 +18,7 @@ export class ReviewController {
 
   @Post('create')
   async create(@Body() dto: CreateReviewDto): Promise<Review> {
-    return this.reviewService.create(dto);
+    return await this.reviewService.create(dto);
   }
 
   @Delete(':id')
@@ -31,6 +31,6 @@ export class ReviewController {
 
   @Get('by-outlet:outletId')
   async getByProduct(@Param('outletId') outletId: string) {
-    return this.reviewService.findByOutletId(outletId);
+    return await this.reviewService.findByOutletId(outletId);
   }
 }

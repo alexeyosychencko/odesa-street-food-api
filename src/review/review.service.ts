@@ -13,18 +13,18 @@ export class ReviewService {
 
   async create(createReviewDto: CreateReviewDto): Promise<Review> {
     const createReview = new this.reviewModel(createReviewDto);
-    return createReview.save();
+    return await createReview.save();
   }
 
   async delete(id: string): Promise<Review | null> {
-    return this.reviewModel.findByIdAndDelete(id).exec();
+    return await this.reviewModel.findByIdAndDelete(id).exec();
   }
 
   async findByOutletId(outletId: string): Promise<Review[]> {
-    return this.reviewModel.find({ outlet: outletId }).exec();
+    return await this.reviewModel.find({ outlet: outletId }).exec();
   }
 
   async deleteByOutletId(outletId: string) {
-    return this.reviewModel.deleteMany({ outlet: outletId }).exec();
+    return await this.reviewModel.deleteMany({ outlet: outletId }).exec();
   }
 }
