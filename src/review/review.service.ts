@@ -21,7 +21,10 @@ export class ReviewService {
   }
 
   async findByOutletId(outletId: string): Promise<Review[]> {
-    return await this.reviewModel.find({ outlet: outletId }).exec();
+    return await this.reviewModel
+      .find({ outlet: outletId })
+      .populate('user')
+      .exec();
   }
 
   async deleteByOutletId(outletId: string) {

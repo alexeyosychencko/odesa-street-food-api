@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { Review } from 'src/review/review.schema';
 import { User } from 'src/user/user.schema';
 
 export type OutletDocument = HydratedDocument<Outlet>;
@@ -68,11 +67,14 @@ export class Outlet {
   @Prop()
   calculatePoliteRating: number;
 
+  @Prop()
+  imageUrl: string;
+
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   user: User;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }] })
-  reviews: Review[];
+  // @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }] })
+  // reviews: Review[];
 }
 
 export const OutletSchema = SchemaFactory.createForClass(Outlet);

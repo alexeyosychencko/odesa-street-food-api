@@ -37,7 +37,7 @@ export class PostService {
       .exec();
   }
 
-  async findById(id: string): Promise<Post> {
+  async findById(id: string): Promise<Post | null> {
     return await this.postModel.findOne({ id }).exec();
   }
 

@@ -49,7 +49,11 @@ export class PostController {
 
   @Get(':id')
   async getByPostId(@Param('id') id: string) {
-    return await this.postService.findById(id);
+    const post = await this.postService.findById(id);
+    if (!post) {
+      throw new HttpException('Not found post.', HttpStatus.NOT_FOUND);
+    }
+    return post;
   }
 
   @Get('get-all')

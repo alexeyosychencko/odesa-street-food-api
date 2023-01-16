@@ -13,11 +13,10 @@ export class CreateOutletDto {
   longitude: number;
   timeOpenSek?: number;
   timeCloseSek?: number;
-  photoUrl?: string;
   createdAt: Date;
-  lastUpdate: Date;
+  lastUpdate?: Date;
   calculateTasteRating: number;
   calculateCleanRating: number;
   calculatePoliteRating: number;
-  userId: string;
+  user: string;
 }
