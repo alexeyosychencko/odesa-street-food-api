@@ -13,6 +13,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ValidationPipe } from '../pipes/validation.pipe';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostService } from './post.service';
 
@@ -22,7 +23,10 @@ export class PostController {
 
   @Post('create')
   @UseInterceptors(FileInterceptor('image'))
-  async create(@Body() dto: CreatePostDto, @UploadedFile() image) {
+  async create(
+    @Body(new ValidationPipe()) dto: CreatePostDto,
+    @UploadedFile() image,
+  ) {
     return await this.postService.create(dto, image);
   }
 
@@ -37,7 +41,7 @@ export class PostController {
   @Patch(':id')
   async patch(
     @Param('id') id: string,
-    @Body() dto: CreatePostDto,
+    @Body(new ValidationPipe()) dto: CreatePostDto,
     @UploadedFile() image,
   ) {
     // TODO: check is this user has access to update this

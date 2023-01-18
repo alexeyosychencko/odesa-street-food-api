@@ -12,6 +12,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ValidationPipe } from '../pipes/validation.pipe';
 import { CreateOutletDto } from './dto/create-outlet.dto';
 import { OutletService } from './outlet.service';
 
@@ -21,7 +22,10 @@ export class OutletController {
 
   @Post('create')
   @UseInterceptors(FileInterceptor('image'))
-  async create(@Body() dto: CreateOutletDto, @UploadedFile() image) {
+  async create(
+    @Body(new ValidationPipe()) dto: CreateOutletDto,
+    @UploadedFile() image,
+  ) {
     return await this.outletService.create(dto, image);
   }
 
@@ -36,7 +40,7 @@ export class OutletController {
   @Patch(':id')
   async patch(
     @Param('id') id: string,
-    @Body() dto: CreateOutletDto,
+    @Body(new ValidationPipe()) dto: CreateOutletDto,
     @UploadedFile() image,
   ) {
     // TODO: check is this user has access to update this
