@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { Review, ReviewDocument } from './review.schema';
 

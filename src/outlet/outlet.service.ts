@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import { CreateOutletDto } from './dto/create-outlet.dto';
 import { Outlet, OutletDocument } from './outlet.schema';
 
