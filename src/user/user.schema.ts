@@ -20,9 +20,6 @@ export class User {
   @Prop()
   isAdmin: boolean;
 
-  @Prop()
-  secondName?: string;
-
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }] })
   posts: Post[];
 

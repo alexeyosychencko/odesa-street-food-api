@@ -1,6 +1,5 @@
 export class RegisterDto {
   email: string;
-  passwordHash: string;
+  password: string;
   name: string;
-  secondName?: string;
 }
