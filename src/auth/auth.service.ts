@@ -8,6 +8,7 @@ import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { LoginDto } from './dto/login.dto';
+import { User } from 'src/user/user.schema';
 
 @Injectable()
 export class AuthService {
@@ -35,5 +36,9 @@ export class AuthService {
       password: hashPassword,
     });
     return user;
+  }
+
+  async findUser(email: string): Promise<User | null> {
+    return await this.userService.getByEmail(email);
   }
 }
