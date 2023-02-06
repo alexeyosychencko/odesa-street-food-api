@@ -8,6 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { RolesGuard } from 'src/guards/roles.guard';
+import { UserGuard } from 'src/guards/user.guard';
 import { Roles } from 'src/roles/roles.decorator';
 import { Role } from 'src/roles/roles.enum';
 import { JwtAuthGuard } from 'src/strategies/jwt.strategy';
@@ -17,8 +18,8 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @UseGuards(JwtAuthGuard, RolesGuard, UserGuard)
+  @Roles(Role.User)
   @Get(':email')
   async get(@Param('email') email: string) {
     const user = await this.userService.getByEmail(email);
@@ -28,7 +29,7 @@ export class UserController {
     return user;
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard, UserGuard)
   @Roles(Role.User)
   @UseGuards(JwtAuthGuard)
   @Delete(':email')
