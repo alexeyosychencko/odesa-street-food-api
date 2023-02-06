@@ -15,8 +15,8 @@ export class UserService {
     return await user.save();
   }
 
-  async delete(id: string): Promise<User | null> {
-    return await this.userModel.findByIdAndDelete(id).exec();
+  async delete(email: string): Promise<User | null> {
+    return await this.userModel.findOneAndDelete({ email }).exec();
   }
 
   async getByEmail(email: string): Promise<User | null> {

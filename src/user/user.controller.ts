@@ -24,9 +24,10 @@ export class UserController {
     return user;
   }
 
-  @Delete(':id')
-  async delete(@Param('id') id: string) {
-    const deleted = await this.userService.delete(id);
+  @UseGuards(JwtAuthGuard)
+  @Delete(':email')
+  async delete(@Param('email') email: string) {
+    const deleted = await this.userService.delete(email);
     if (!deleted) {
       throw new HttpException('Not found user.', HttpStatus.NOT_FOUND);
     }

@@ -6,6 +6,7 @@ import {
   UseGuards,
   Request,
 } from '@nestjs/common';
+import { ValidationPipe } from 'src/pipes/validation.pipe';
 import { LocalAuthGuard } from 'src/strategies/local.strategy';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { AuthService } from './auth.service';
@@ -15,9 +16,8 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  async registration(@Body() dto: CreateUserDto) {
+  async registration(@Body(new ValidationPipe()) dto: CreateUserDto) {
     const user = await this.authService.registration(dto);
-    // TODO: return token
     return user;
   }
 
