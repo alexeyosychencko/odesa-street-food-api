@@ -9,9 +9,14 @@ import {
   Patch,
   Post,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/roles/roles.decorator';
+import { Role } from 'src/roles/roles.enum';
+import { JwtAuthGuard } from 'src/strategies/jwt.strategy';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { CreateOutletDto } from './dto/create-outlet.dto';
 import { OutletService } from './outlet.service';
@@ -20,6 +25,8 @@ import { OutletService } from './outlet.service';
 export class OutletController {
   constructor(private readonly outletService: OutletService) {}
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Post('create')
   @UseInterceptors(FileInterceptor('image'))
   async create(
@@ -29,6 +36,8 @@ export class OutletController {
     return await this.outletService.create(dto, image);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Delete(':id')
   async delete(@Param('id') id: string) {
     const deleted = await this.outletService.delete(id);
@@ -37,6 +46,8 @@ export class OutletController {
     }
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Patch(':id')
   async patch(
     @Param('id') id: string,

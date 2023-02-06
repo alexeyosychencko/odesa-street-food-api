@@ -10,9 +10,14 @@ import {
   Post,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/roles/roles.decorator';
+import { Role } from 'src/roles/roles.enum';
+import { JwtAuthGuard } from 'src/strategies/jwt.strategy';
 import { ValidationPipe } from '../pipes/validation.pipe';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostService } from './post.service';
@@ -21,6 +26,8 @@ import { PostService } from './post.service';
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Post('create')
   @UseInterceptors(FileInterceptor('image'))
   async create(
@@ -30,6 +37,8 @@ export class PostController {
     return await this.postService.create(dto, image);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Delete(':id')
   async delete(@Param('id') id: string) {
     const deleted = await this.postService.delete(id);
@@ -38,6 +47,8 @@ export class PostController {
     }
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Patch(':id')
   async patch(
     @Param('id') id: string,

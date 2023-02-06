@@ -15,12 +15,12 @@ export class AuthService {
   async validateUser(username: string, password: string) {
     const user = await this.userService.getByEmail(username);
     if (!user) {
-      console.log('user not found.');
+      console.error('user not found.');
       return null;
     }
     const isCorrectPassword = await bcrypt.compare(password, user.password);
     if (!isCorrectPassword) {
-      console.log('password is incorrect.');
+      console.error('password is incorrect.');
       return null;
     }
     return user;
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   async login(user: User) {
-    const payload = { username: user.email };
+    const payload = { username: user.email, role: user.role };
     return {
       access_token: this.jwtService.sign(payload),
     };

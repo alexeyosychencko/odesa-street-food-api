@@ -3,6 +3,7 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import { Outlet } from 'src/outlet/outlet.schema';
 import { Post } from 'src/post/post.schema';
 import { Review } from 'src/review/review.schema';
+import { Role } from 'src/roles/roles.enum';
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -20,7 +21,7 @@ export class User {
   name: string;
 
   @Prop()
-  isAdmin: boolean;
+  role: Role;
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }] })
   posts: Post[];
